@@ -1,0 +1,15 @@
+/*用户状态：正常用户*/
+.user-normal {
+    background: rgb(212, 254, 214);
+    color:#ffffff!important;
+    font-size: 1.4em!important;
+    text-align: center!important;
+}
+/*用户状态：冻结用户*/
+.user-frozen {
+    background: #ffd2ce;
+    color:#ffffff!important;
+    font-size: 1.4em!important;
+    text-align: center!important;
+}
+

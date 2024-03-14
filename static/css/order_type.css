@@ -1,0 +1,9 @@
+/*金币订单用此演示高亮显示*/
+.gold-coins{
+    background: #f4fbaa;
+}
+
+/*宝石订单用此颜色高亮显示*/
+.gem{
+    background: #edfde3;
+}

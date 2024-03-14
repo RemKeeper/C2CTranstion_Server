@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>管理页</title>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <link rel="stylesheet" href="css/user_state.css">
+    <link rel="stylesheet" href="css/order_type.css">
+    <link rel="stylesheet" href="css/Remove_self-styling.css">
+</head>
+
+<body class="mdui-drawer-body-left">
+    <div class="mdui-appbar mdui-shadow-1">
+        <div class="mdui-toolbar">
+            <a href="javascript:" class="mdui-btn mdui-btn-icon" id="toggle">
+                <i class="mdui-icon material-icons">menu</i>
+            </a>
+        </div>
+    </div>
+
+    <div class="mdui-drawer" id="drawer">
+        <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">account_circle</i>
+                <div class="mdui-list-item-content" onclick="UserManager()">用户管理</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">shopping_cart</i>
+                <div class="mdui-list-item-content" onclick="OrderManager()">订单管理</div>
+            </li>
+            <li class="mdui-subheader">平台设置</li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+                <div class="mdui-list-item-content" onclick="Settings()">综合设置</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">insert_chart_outlined</i>
+                <div class="mdui-list-item-content" onclick="DataStatistics()">数据统计</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">payment</i>
+                <div class="mdui-list-item-content" onclick="WithdrawalManager()">提现管理</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple toast" onclick="Logout()">
+                <i class="mdui-list-item-icon mdui-icon material-icons">chevron_left</i>
+                <div class="mdui-list-item-content">退出登录</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple toast" onclick="showContactDialog()">
+                <i class="mdui-list-item-icon mdui-icon material-icons">insert_emoticon</i>
+                <div class="mdui-list-item-content">客户服务</div>
+            </li>
+        </ul>
+    </div>
+
+
+    <!--用户管理-->
+    <div class="mdui-container item-page">
+        <div class="mdui-typo">
+            <h1>用户列表<br/><small>注：绿色为正常用户，红色为冻结用户</small></h1>
+            <div class="mdui-row">
+                <div class="mdui-col-xs-2">
+                    <select class="mdui-select" id="UserSelect" mdui-select>
+                        <option value="所有用户">所有用户</option>
+                        <option value="正常用户">正常用户</option>
+                        <option value="冻结用户">冻结用户</option>
+                    </select>
+                </div>
+
+
+                <div class="mdui-col-xs-2">
+                    <select class="mdui-select" id="LevelSelect" mdui-select>
+                        <option value="所有权限">所有权限</option>
+                        <option value="临时用户">临时用户</option>
+                        <option value="正式用户">正式用户</option>
+                        <option value="初级担保人">初级担保人</option>
+                        <option value="高级担保人">高级担保人</option>
+                        <option value="管理员">管理员</option>
+                    </select>
+                </div>
+            </div>
+            <!-- 使用表格展示用户信息 -->
+
+            <table class="mdui-table">
+                <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>用户ID</th>
+                        <th>用户余额</th>
+                        <th>用户金币</th>
+                        <th>可负余额</th>
+                        <th>用户权限等级</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="UserManagerData">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!--订单管理-->
+    <div class="mdui-container item-page">
+        <div class="mdui-typo">
+            <h1>订单管理<br/><small>注：黄色为金币订单，蓝色为宝石订单</small></h1>
+
+            <div class="mdui-row">
+                <div class="mdui-col-xs-2">
+                    <select class="mdui-select" id="PriceSort" mdui-select>
+                        <option value="默认排序">默认排序</option>
+                        <option value="按总价升序">按总价升序</option>
+                        <option value="按总价降序">按总价降序</option>
+                    </select>
+                </div>
+                <div class="mdui-col-xs-2">
+                    <select class="mdui-select" id="UserStatus" mdui-select>
+                        <option value="所有状态">所有状态</option>
+                        <option value="正常订单">正常订单</option>
+                        <option value="冻结订单">冻结订单</option>
+                    </select>
+                </div>
+
+
+
+            </div>
+            <!-- 使用表格展示用户信息 -->
+
+            <table class="mdui-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>订单</th>
+                        <th>购买方</th>
+                        <th>出售方</th>
+                        <th>担保人</th>
+                        <th>订单状态</th>
+                        <th>冻结原因</th>
+                        <th>数量</th>
+                        <th>单价</th>
+                        <th>总价</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="OrderManagerData">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--综合设置-->
+    <div class="mdui-container item-page">
+        <div class="mdui-typo">
+            <h1>综合设置</h1>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">赏金比例</label>
+                <input class="mdui-textfield-input limit-100" type="number" id="bounty_percentage" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">平台抽成</label>
+                <input class="mdui-textfield-input limit-100" type="number" id="platform_commission" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">最低金币交易数</label>
+                <input class="mdui-textfield-input limit-100" type="number" id="min_coin_transaction" />
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">最低宝石交易数</label>
+                <input class="mdui-textfield-input limit-100" type="number" id="min_gem_transaction" />
+            </div>
+            <div class="mdui-m-y-3"></div>
+            <div class="mdui-row">
+                <div class="mdui-col-xs-6">
+                    <label class="mdui-textfield-label">分成比例</label>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">一级</label>
+                        <input class="mdui-textfield-input limit-100" type="number" id="dividend_percentage_I" />
+                    </div>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">二级</label>
+                        <input class="mdui-textfield-input limit-100" type="number" id="dividend_percentage_II"/>
+                    </div>
+                </div>
+                <div class="mdui-col-xs-6">
+                    <label class="mdui-textfield-label">金币分成比例</label>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">一级</label>
+                        <input class="mdui-textfield-input limit-100" type="number" id="coin_dividend_percentage_I"/>
+                    </div>
+                    <div class="mdui-textfield mdui-textfield-floating-label">
+                        <label class="mdui-textfield-label">二级</label>
+                        <input class="mdui-textfield-input limit-100" type="number" id="coin_dividend_percentage_II"/>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">公告设置</label>
+                <textarea class="mdui-textfield-input" id="bulletin"></textarea>
+            </div>
+            <div class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-theme mdui-color-theme-accent" id="Save">保存设置
+            </div>
+            
+
+        </div>
+    </div><!--数据统计-->
+    <div class="mdui-container item-page">
+        <div class="mdui-typo">
+            <h1>数据统计</h1>
+            <div class="mdui-container">
+                <div class="mdui-m-y-3"></div>
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title mdui-typo-headline">现金佣金发放</div>
+                        <div class="mdui-card-primary-subtitle">已经发放的现金佣金</div>
+                        <div class="mdui-typo-display-1 mdui-text-color-light-green-900 mdui-m-y-1" id="TotalDividend">10000元</div>
+                    </div>
+                </div>
+                <div class="mdui-m-y-1"></div>
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title mdui-typo-headline">金币佣金发放</div>
+                        <div class="mdui-card-primary-subtitle">已经发放的金币佣金</div>
+                        <div class="mdui-typo-display-1 mdui-text-color-light-green-900 mdui-m-y-1" id="CoinDividend">200次</div>
+                    </div>
+                </div>
+                <div class="mdui-m-y-1"></div>
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title mdui-typo-headline">金币总交易数量</div>
+                        <div class="mdui-card-primary-subtitle">已完成的金币订单数量</div>
+                        <div class="mdui-typo-display-1 mdui-text-color-light-green-900 mdui-m-y-1" id="CoinNumberOfTransactions">300单</div>
+                    </div>
+                </div>
+                <div class="mdui-m-y-1"></div>
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title mdui-typo-headline">宝石总交易数量</div>
+                        <div class="mdui-card-primary-subtitle">已完成的宝石订单数量</div>
+                        <div class="mdui-typo-display-1 mdui-text-color-light-green-900 mdui-m-y-1" id="GemNumberOfTransactions">400单</div>
+                    </div>
+                </div>
+                <div class="mdui-m-y-1"></div>
+                <div class="mdui-card">
+                    <div class="mdui-card-primary">
+                        <div class="mdui-card-primary-title mdui-typo-headline">平台累计利润</div>
+                        <div class="mdui-card-primary-subtitle">平台总利润</div>
+                        <div class="mdui-typo-display-1 mdui-text-color-light-green-900 mdui-m-y-1" id="PlatformCumulativeProfit">400单</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--提现管理-->
+    <div class="mdui-container item-page">
+        <div class="mdui-typo">
+            <h1>提现管理</h1>
+            <!-- 使用表格展示用户信息 -->
+
+            <table class="mdui-table mdui-table-hoverable">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>提现ID</th>
+                        <th>发起方</th>
+                        <th>账户余额</th>
+                        <th>提现金额</th>
+                        <th>账户信息</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="WithdrawalManagerData">
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--用户信息弹窗-->
+    <script type="text/template" id="UserInfoToast">
+        <div class="mdui-card mdui-m-y-0">
+            <div class="mdui-card-content">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">用户名</div>
+                        <div class="mdui-typo-subheading" id="TUserName">xxxxxSSS </div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">游戏 ID</div>
+                        <div class="mdui-typo-subheading" id="TGameID">123456789</div>
+                    </div>
+                </div>
+
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">预留手机号</div>
+                        <div class="mdui-typo-subheading" id="TPhone">13800138000</div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">真实姓名</div>
+                        <div class="mdui-typo-subheading" id="TName">13800138000</div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">微信支付</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;" id="TAlipay">
+                            查看图片
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">支付宝</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;" id="TWxpay">
+                            查看图片
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+
+
+    <!--联系客服-->
+    <div class="mdui-dialog" style="min-height:512vh;" id="Contact">
+        <div class="mdui-tab mdui-tab-full-width" id="example4-tab">
+            <a href="#WeChatServer" class="mdui-ripple">微信客服</a>
+            <a href="#QQServer" class="mdui-ripple">QQ客服</a>
+        </div>
+        <div id="WeChatServer" class="mdui-p-a-2">
+
+        </div>
+        <div id="QQServer" class="mdui-p-a-2">
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script src="js/utils/qrcode/qrcode.min.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/utils/qrcode/llqrcode.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/utils/qrcode/analyticCode.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/utils/utils.js"></script>
+    <script src="js/server.js"></script>
+    <script src="js/ContactServer.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>

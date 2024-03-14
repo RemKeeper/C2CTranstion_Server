@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>用户注册</title>
+  <!-- 引入 mdui 样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+  <!-- 引入 mdui 脚本 -->
+ 
+  <!-- <script src="js/utils/qrcode/analyticCode.js" type="text/javascript" charset="UTF-8"></script>
+  <script src="js/utils/qrcode/llqrcode.js" type="text/javascript" charset="UTF-8"></script> -->
+  <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/js-md5@0.7.3/src/md5.js"></script>
+  <script src="js/utils/utils.js"></script>
+  <script src="js/server.js"></script>
+  <script src="js/register.js"></script>
+  <script src="js/utils/DataPackage.js"></script>
+  <link rel="stylesheet" href="css/Remove_self-styling.css">
+  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="css/utils.css" />
+  <!-- 自定义样式 -->
+</head>
+
+<body>
+  <!-- 注册框的容器 -->
+  <div class="mdui-container">
+    <!-- 注册框的卡片 -->
+    <div class="mdui-card mdui-shadow-6">
+      <!-- 注册框的标题和图标 -->
+      <div class="mdui-card-header">
+        <div class="mdui-card-header-icon mdui-icon material-icons">person_add</div>
+        <div class="mdui-card-header-title" style="overflow:visible;margin-left:10px;">注册</div>
+      </div>
+      <!-- 注册框的内容 -->
+      <div class="mdui-card-content">
+        <!-- 用户名输入框 -->
+        <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">用户名</label>
+          <input id="UserName" class="mdui-textfield-input" type="text" required />
+        </div>
+        <!-- 密码输入框 -->
+        <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">密码</label>
+          <input id="Password" class="mdui-textfield-input" type="password" required />
+        </div>
+        <!-- 支付宝key输入框 -->
+        <!-- <div class="mdui-textfield">
+        <label id="AlipayString" class="mdui-textfield-input">点击选择支付宝二维码</label>
+        <input class="mdui-textfield-input file-input" onChange="getUrl(this,'file-url')" type="file" name="" value=""  required/>
+      </div> -->
+        <!-- 微信key输入框 -->
+        <!-- <div class="mdui-textfield">
+        <label id="WxpayString" class="mdui-textfield-input">点击选择微信二维码</label>
+        <input class="mdui-textfield-input file-input" onChange="getUrl(this,'file-url')" type="file" name="" value="" required/>
+      </div> -->
+        <!--邀请码（可选）-->
+        <div class="mdui-textfield mdui-textfield-floating-label">
+          <label class="mdui-textfield-label">邀请码（可选）</label>
+          <input id="InviteID" class="mdui-textfield-input" type="text" />
+        </div>
+      </div>
+
+      <!-- 注册框的按钮 -->
+      <div class="mdui-card-actions">
+        <!-- 返回登陆按钮 -->
+        <a class="mdui-btn mdui-btn-block mdui-ripple mdui-text-color-theme-accent" href="login.html">
+          <i class="mdui-icon material-icons">arrow_back</i>
+          返回登陆
+        </a>
+        <!-- 注册按钮 -->
+        <button class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-theme mdui-color-theme-accent" onclick="Register()">注册</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

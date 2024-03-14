@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>用户详情</title>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <link rel="stylesheet" href="css/Remove_self-styling.css">
+    <link rel="stylesheet" href="css/order_type.css">
+
+
+</head>
+
+<body class="mdui-drawer-body-left">
+
+    <div class="mdui-appbar mdui-shadow-1">
+        <div class="mdui-toolbar">
+            <a href="javascript:" class="mdui-btn mdui-btn-icon" id="toggle">
+                <i class="mdui-icon material-icons">menu</i>
+            </a>
+        </div>
+    </div>
+
+    <div class="mdui-drawer" id="drawer">
+        <ul class="mdui-list">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons" onclick="UserInfo()">account_circle</i>
+                <div class="mdui-list-item-content">账户资料</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">shopping_cart</i>
+                <div class="mdui-list-item-content" onclick="AllOrder()">全部订单</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">add_shopping_cart</i>
+                <div class="mdui-list-item-content" onclick="WaitingOrder()">等候订单</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons">remove_shopping_cart</i>
+                <div class="mdui-list-item-content" onclick="FrozenOrder()">冻结订单</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple" id="GuaranteeOrderTab">
+                <i class="mdui-list-item-icon mdui-icon material-icons">verified_user</i>
+                <div class="mdui-list-item-content" onclick="GuaranteeOrder()">担保订单</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple toast" id="GuaranteeOrderTab">
+                <i class="mdui-list-item-icon mdui-icon material-icons">store</i>
+                <div class="mdui-list-item-content" onclick="OrderHall()">订单大厅</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple" id="InviteUsers">
+                <i class="mdui-list-item-icon mdui-icon material-icons">person_add</i>
+                <div class="mdui-list-item-content" onclick="InviteNewUsers()">邀请新用户</div>
+            </li>
+            <li class="mdui-subheader">其他</li>
+            <!--        <li class="mdui-list-item mdui-ripple">-->
+            <!--            <i class="mdui-list-item-icon mdui-icon material-icons">edit</i>-->
+            <!--            <div class="mdui-list-item-content">信息修改</div>-->
+            <!--        </li>-->
+            <li class="mdui-list-item mdui-ripple toast" onclick="showContactDialog()">
+                <i class="mdui-list-item-icon mdui-icon material-icons">insert_emoticon</i>
+                <div class="mdui-list-item-content">客户服务</div>
+            </li>
+            <li class="mdui-list-item mdui-ripple toast" onclick="aboutMore()">
+                <i class="mdui-list-item-icon mdui-icon material-icons">error</i>
+                <div class="mdui-list-item-content">关于更多</div>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <!--<div class="mdui-container">-->
+    <!--    <button id="toggle" class="mdui-btn mdui-color-pink-accent mdui-m-a-1">toggle</button>-->
+
+    <!--</div>-->
+
+    <div class="mdui-container item-page">
+        <div class="mdui-card mdui-m-y-0">
+            <div class="mdui-card-header">
+                <div class="mdui-card-header-title" id="UserName">用户名</div>
+                <div class="mdui-card-header-subtitle" id="UserID">0</div>
+            </div>
+            <div class="mdui-card-content">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                        <div class="mdui-typo-title">现金余额</div>
+                        <span class="mdui-typo-subheading">￥</span>
+                        <div class="mdui-typo-display-1 mdui-text-color-green" id="CashBalance">888.88</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right" style="float: right">
+                        <button class="mdui-btn mdui-shadow-1 mdui-ripple mdui-color-theme" onclick="BalanceWithdrawal()">提现</button>
+                        <button class="mdui-btn mdui-shadow-1 mdui-ripple mdui-color-theme" onclick="BalanceTransaction()">转账</button>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-4">
+                        <div class="mdui-typo-title">金币余额</div>
+                        <span class="mdui-typo-subheading">￥</span>
+                        <div class="mdui-typo-display-1 mdui-text-color-green" id="GoldCoinBalance">888.88</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right" style="float: right">
+                        <button class="mdui-btn mdui-shadow-1 mdui-ripple mdui-color-theme" onclick="GoldCoinWithdrawal()">提现</button>
+                        <button class="mdui-btn mdui-shadow-1 mdui-ripple mdui-color-theme" onclick="GoldCoinTransaction()">转账</button>
+                    </div>
+
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">游戏 ID</div>
+                        <div class="mdui-typo-subheading" id="GameID">123456789</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <button onclick="EditDialog(this)"
+                            class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-theme-accent"><i
+                                class="mdui-icon material-icons">edit</i></button>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">姓名</div>
+                        <div class="mdui-typo-subheading" id="Name">李嘉诚</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <button onclick="EditDialog(this)"
+                            class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-theme-accent"><i
+                                class="mdui-icon material-icons">edit</i></button>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">银行卡卡号</div>
+                        <div class="mdui-typo-subheading" id="BankCardNumber">12341241241412</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <button onclick="EditDialog(this)"
+                            class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-theme-accent"><i
+                                class="mdui-icon material-icons">edit</i></button>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">微信</div>
+                        <div class="mdui-typo-subheading" id="WeChat">未绑定</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;">
+                            绑定
+                            <input class="mdui-textfield-input file-input" onChange="getWxUrl(this,'file-url')"
+                                style="opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%; "
+                                type="file" name="" value="" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">支付宝</div>
+                        <div class="mdui-typo-subheading" id="Alipay">未绑定</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;">
+                            绑定
+                            <input class="mdui-textfield-input file-input" onChange="getAlipayUrl(this,'file-url')"
+                                style="opacity: 0; position: absolute; top: 0; left: 0; width: 100%; height: 100%; "
+                                type="file" name="" value="" required />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">预留手机号</div>
+                        <div id="PhoneNumber" class="mdui-typo-subheading">13800138000</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <button onclick="ShowEditPhoneNumberDialog()"
+                            class="mdui-btn mdui-btn-icon mdui-ripple mdui-color-theme-accent"><i
+                                class="mdui-icon material-icons">edit</i></button>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <button
+                    class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-light-green mdui-text-color-white" onclick="SavaInfo()">保存信息</button>
+                    <div class="mdui-m-y-1"></div>
+                    <button
+                    class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-red mdui-text-color-white" onclick="Logout()">退出登录</button>
+            </div>
+        </div>
+    </div>
+
+    <!--全部订单-->
+    <div class="mdui-container item-page" style="width: 100%" id="AllOrder">
+        <div class="mdui-typo">
+            <h1>全部订单<br /><small>注：黄色为金币订单，蓝色为宝石订单</small></h1>
+            <div class="mdui-row">
+                <div class="mdui-col-md-6 mdui-col-offset-md-0">
+                    <!-- 卡片 -->
+                    <div class="mdui-card">
+                        <!-- 表格 -->
+                        <div class="mdui-table-fluid">
+                            <table class="mdui-table mdui-table-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>订单ID</th>
+                                        <th>订单类型</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>总价</th>
+                                        <th>游戏ID</th>
+                                        <th>担保人ID</th>
+                                        <th>冻结原因</th>
+                                        <th>是否发货</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Data">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--等候订单-->
+    <div class="mdui-container item-page" style="width: 100%" id="WaitingOrder">
+        <div class="mdui-typo">
+            <h1>等候订单<br /><small>注：黄色为金币订单，蓝色为宝石订单</small></h1>
+            <div class="mdui-row">
+                <div class="mdui-col-md-6 mdui-col-offset-md-0">
+                    <!-- 卡片 -->
+                    <div class="mdui-card">
+                        <!-- 表格 -->
+                        <div class="mdui-table-fluid">
+                            <table class="mdui-table mdui-table-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>订单ID</th>
+                                        <th>订单类型</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>总价</th>
+                                        <th>游戏ID</th>
+                                        <th>担保人ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Data">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--冻结订单-->
+    <div class="mdui-container item-page" style="width: 100%" id="FrozenOrder">
+        <div class="mdui-typo">
+            <h1>冻结订单<br /><small>注：黄色为金币订单，蓝色为宝石订单</small></h1>
+            <div class="mdui-row">
+                <div class="mdui-col-md-6 mdui-col-offset-md-0">
+                    <!-- 卡片 -->
+                    <div class="mdui-card">
+                        <!-- 表格 -->
+                        <div class="mdui-table-fluid">
+                            <table class="mdui-table mdui-table-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>订单ID</th>
+                                        <th>订单类型</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>总价</th>
+                                        <th>游戏ID</th>
+                                        <th>担保人ID</th>
+                                        <th>冻结原因</th>
+                                        <th>是否发货</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Data">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--担保订单-->
+    <div class="mdui-container item-page" style="width: 100%" id="GuaranteeOrder">
+        <div class="mdui-typo">
+            <h1>担保订单<br /><small>注：黄色为金币订单，蓝色为宝石订单</small></h1>
+            <div class="mdui-row">
+                <div class="mdui-col-md-6 mdui-col-offset-md-0">
+                    <!-- 卡片 -->
+                    <div class="mdui-card">
+                        <!-- 表格 -->
+                        <div class="mdui-table-fluid">
+                            <table class="mdui-table mdui-table-hoverable">
+                                <thead>
+                                    <tr>
+                                        <th>时间</th>
+                                        <th>订单ID</th>
+                                        <th>单价</th>
+                                        <th>数量</th>
+                                        <th>总价</th>
+                                        <th>是否发货</th>
+                                        <th>冻结原因</th>
+                                        <th>卖家信息</th>
+                                        <th>买家信息</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="Data">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--邀请新用户-->
+    <div class="mdui-container item-page" style="width: 100%">
+        <div class="mdui-typo">
+            <h1>邀请用户<br /><small>注：已邀请用户至多两层返利（点击即可查看下下级邀请者），被邀请用户发生交易时将会给您返利！</small></h1>
+            <ul class="mdui-list mdui-container-fluid" id="inviteUserList">
+            </ul>
+            <div style="margin-top: 2%">
+                <button class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-theme mdui-color-theme-accent"
+                    onclick="InviteNewUsersToast()">邀请新用户</button>
+            </div>
+        </div>
+    </div>
+
+    <!--用户信息弹窗-->
+    <script type="text/template" id="UserInfoToast">
+        <div class="mdui-card mdui-m-y-0">
+            <div class="mdui-card-content">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">用户名</div>
+                        <div class="mdui-typo-subheading" id="TUserName">xxxxxSSS </div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">游戏 ID</div>
+                        <div class="mdui-typo-subheading" id="TGameID">123456789</div>
+                    </div>
+                </div>
+
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">预留手机号</div>
+                        <div class="mdui-typo-subheading" id="TPhone">13800138000</div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">真实姓名</div>
+                        <div class="mdui-typo-subheading" id="TName">13800138000</div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">微信支付</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;" id="TAlipay">
+                            查看图片
+                        </div>
+                    </div>
+                </div>
+                <div class="mdui-divider mdui-m-y-4"></div>
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-6">
+                        <div class="mdui-typo-title">支付宝</div>
+                    </div>
+                    <div class="mdui-col-xs-6 mdui-text-right">
+                        <div class="mdui-btn mdui-ripple mdui-color-indigo-300 mdui-shadow-1"
+                            style="position: relative; overflow: hidden;" id="TWxpay">
+                            查看图片
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <!--联系客服-->
+    <div class="mdui-dialog" style="min-height:512vh;" id="Contact">
+        <div class="mdui-tab mdui-tab-full-width" id="example4-tab">
+            <a href="#WeChatServer" class="mdui-ripple">微信客服</a>
+            <a href="#QQServer" class="mdui-ripple">QQ客服</a>
+        </div>
+        <div id="WeChatServer" class="mdui-p-a-2">
+
+        </div>
+        <div id="QQServer" class="mdui-p-a-2">
+
+        </div>
+    </div>
+    <!--交易模板-->
+    <div class="mdui-dialog" id="TransactionInvitationTemplate">
+        <div class="mdui-row">
+            <div class="mdui-col-md-6 mdui-col-offset-md-0">
+                <!-- 卡片 -->
+                <div class="mdui-card">
+                    <!-- 表格 -->
+                    <div class="mdui-table-fluid">
+                        <table class="mdui-table mdui-table-hoverable">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>订单ID</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>总价</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Data">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!--转账模板-->
+    <script type="text/template" id="TransactionTemplate">
+        <div class="mdui-container">
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">用户ID</label>
+                <input class="mdui-textfield-input" type="number" id="TUserID" required/>
+            </div>
+            <div class="mdui-textfield mdui-textfield-floating-label">
+                <label class="mdui-textfield-label">转账金额</label>
+                <input class="mdui-textfield-input" type="number" id="TValue" required/>
+            </div>
+        </div>
+    </script>
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+    <script src="js/utils/qrcode/qrcode.min.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/utils/qrcode/llqrcode.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/utils/qrcode/analyticCode.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/server.js"></script>
+    <!--<script src="https://raw.githubusercontent.com/ushelp/EasyQRCodeJS/master/src/easy.qrcode.js"></script>-->
+    <script src="js/utils/utils.js"></script>
+    <script src="js/about.js"></script>
+    <script src="js/ContactServer.js"></script>
+    <script src="js/UserInfo.js"></script>
+
+</body>
+
+</html>

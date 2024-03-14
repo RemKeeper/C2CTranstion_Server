@@ -1,0 +1,7 @@
+.mdui-select{
+    width: 100%!important;
+}
+.mdui-dialog-content,.mdui-dialog{
+    overflow: visible!important;
+}
+

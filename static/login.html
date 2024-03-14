@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<title>用户登陆</title>
+	<!-- 引入 mdui 样式 -->
+	<link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+	<!-- 引入 mdui 脚本 -->
+	<script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/js-md5@0.7.3/src/md5.js"></script>
+	<link rel="stylesheet" href="css/utils.css"/>
+	<link rel="stylesheet" href="css/Remove_self-styling.css">
+	<script src="js/utils/utils.js"></script>
+	<script src="js/server.js"></script>
+	<script src="js/login.js"></script>
+	<!-- 自定义样式 -->
+	<link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+<!-- 登陆框的容器 -->
+<div class="mdui-container">
+	<!-- 登陆框的卡片 -->
+	<div class="mdui-card mdui-shadow-6">
+		<!-- 登陆框的标题和图标 -->
+		<div class="mdui-card-header">
+			<div class="mdui-card-header-icon mdui-icon material-icons">account_circle</div>
+			<div class="mdui-card-header-title" style="overflow:visible;margin-left:10px;">登陆</div>
+		</div>
+		<!-- 登陆框的内容 -->
+		<div class="mdui-card-content">
+			<!-- 用户名输入框 -->
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">用户名</label>
+				<input class="mdui-textfield-input" type="text" id="UserName" required/>
+			</div>
+			<!-- 密码输入框 -->
+			<div class="mdui-textfield mdui-textfield-floating-label">
+				<label class="mdui-textfield-label">密码</label>
+				<input class="mdui-textfield-input" type="password" id="Password" required/>
+			</div>
+		</div>
+		<!-- 登陆框的按钮 -->
+		<div class="mdui-card-actions">
+			<!-- 注册按钮 -->
+			<a class="mdui-btn mdui-btn-block " href="register.html">
+				<i class="mdui-icon material-icons">arrow_back</i>
+				注册
+				
+			</a>
+			<!-- 登陆按钮 -->
+			<button class="mdui-btn mdui-btn-block mdui-shadow-1 mdui-ripple mdui-color-theme mdui-color-theme-accent" onclick="Login()">登陆</button>
+		</div>
+	</div>
+</div>
+</body>
+</html>

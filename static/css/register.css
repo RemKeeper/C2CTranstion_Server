@@ -1,0 +1,65 @@
+body {
+    /*background-image: url("https://source.unsplash.com/random/1920x1080");*/
+    background-size: cover;
+    background-position: center;
+}
+/* 设置注册框居中 */
+.mdui-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+/* 设置注册框的宽度和圆角 */
+.mdui-card {
+    width: 400px;
+    border-radius: 16px;
+}
+/* 设置注册框的标题和图标 */
+.mdui-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mdui-card-header-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+.mdui-card-header-icon {
+    margin-right: 8px;
+}
+/* 设置注册框的内容和按钮 */
+.mdui-card-content {
+    padding: 16px;
+}
+.mdui-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+/* 设置注册框的动画效果 */
+.mdui-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.file-input{
+    position: absolute;
+    /*width: 120px;*/
+    height: 60px;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 10;
+}

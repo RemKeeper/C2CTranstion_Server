@@ -1,0 +1,53 @@
+body {
+    background-size: cover;
+    background-position: center;
+}
+/* 设置登陆框居中 */
+.mdui-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+/* 设置登陆框的宽度和圆角 */
+.mdui-card {
+    width: 400px;
+    border-radius: 16px;
+}
+/* 设置登陆框的标题和图标 */
+.mdui-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mdui-card-header-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+.mdui-card-header-icon {
+    margin-right: 8px;
+}
+/* 设置登陆框的内容和按钮 */
+.mdui-card-content {
+    padding: 16px;
+}
+.mdui-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+/* 设置登陆框的动画效果 */
+.mdui-card {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
